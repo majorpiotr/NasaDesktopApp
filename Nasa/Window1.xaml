@@ -1,0 +1,84 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nasa"
+        xmlns:Properties="clr-namespace:Nasa.Properties" x:Name="SearchResultsWindow" x:Class="Nasa.Window1"
+        mc:Ignorable="d"
+        Title="Window1" Loaded="SearchResultsWindow_Loaded" SizeChanged="SearchResultsWindow_SizeChanged" Foreground="Black" ScrollViewer.VerticalScrollBarVisibility="Disabled" WindowState="Maximized" Topmost="True" WindowStyle="None">
+    <Window.Background>
+        <SolidColorBrush Color="White" Opacity="0"/>
+    </Window.Background>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Duration="00:00:3" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="images/8k_stars_milky_way.jpg" Opacity="0.8"/>
+        </Grid.Background>
+        <ListView x:Name="SearchList" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.ColumnSpan="3"  Margin="0,135,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SelectionChanged="SearchList_SelectionChanged" BorderBrush="#FFD9B08C" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+            <ListView.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                     Color="#FFD9B08C"/>
+            </ListView.Resources>
+            <ListView.Background>
+                <SolidColorBrush Color="Black" Opacity="0"/>
+            </ListView.Background>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" CanHorizontallyScroll="True" CanVerticallyScroll="True" Margin="0,0,0,0"  Tag="{Binding ImageData}" ToolTip="{Binding Description}">
+                        <Image Source="{Binding ImageData}" Stretch="UniformToFill" Width="{Binding Size}" Height="{Binding Size}" HorizontalAlignment="Center" VerticalAlignment="Top"></Image>
+                        <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"  VerticalAlignment="Bottom" FontSize="16" FontFamily="Times New Roman" Background="#FF116466" Padding="5" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <DockPanel>
+            <TextBlock x:Name="CategoryTitle" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="33" Margin="10,19,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="113" FontSize="18" FontFamily="Segoe Print" Foreground="#FFD9B08C"/>
+            <Button x:Name="SlideShow" Content="Play" Grid.Column="2" HorizontalAlignment="Right" Height="33" Margin="0,19,10,0" VerticalAlignment="Top" Width="84" FontSize="18" Click="SlideShow_Click" Foreground="#FFD9B08C" BorderBrush="#FFD9B08C" FontFamily="Segoe Print">
+                <Button.Background>
+                    <SolidColorBrush Color="#FF116466" Opacity="0"/>
+                </Button.Background>
+            </Button>
+            <Button DockPanel.Dock="Right" Content="X" Margin="0,19,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#FFD9B08C" BorderBrush="#FFD9B08C" Padding="3" FontFamily="Segoe Print" Click="Button_Click">
+                <Button.Background>
+                    <SolidColorBrush Color="#FF116466" Opacity="0"/>
+                </Button.Background>
+            </Button>
+        </DockPanel>
+        
+        
+        <DockPanel>
+            <Image Height="508" VerticalAlignment="Top" Width="100"/>
+        </DockPanel>
+        <Slider x:Name="SizeSlider" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="740" SmallChange="1" Value="30" ValueChanged="Slider_ValueChanged" Maximum="121" Minimum="5" ToolTip="Size" TickPlacement="TopLeft" Cursor="SizeAll" Background="{x:Null}" Foreground="#FFD9B08C" BorderBrush="#FFD9B08C">
+            <Slider.Effect>
+                <DropShadowEffect/>
+            </Slider.Effect>
+        </Slider>
+
+        
+        
+        <ComboBox x:Name="PageList" Grid.Column="2" HorizontalAlignment="Right" Margin="0,87,0,0" VerticalAlignment="Top" Width="120" BorderBrush="#FFD9B08C" Foreground="#FFD9B08C" FontSize="18" FontFamily="Segoe Print">
+            <ComboBox.Background>
+                <SolidColorBrush Color="#FF116466" Opacity="0"/>
+            </ComboBox.Background>
+            <ComboBox.Effect>
+                <DropShadowEffect/>
+            </ComboBox.Effect>
+        </ComboBox>
+    </Grid>
+</Window>
